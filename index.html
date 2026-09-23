@@ -1,404 +1,447 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estética Capilar Pinamar — Haute Coiffure VIP</title>
+  <title>Estética Capilar Pinamar - Ultra HD 3D VIP Salon & Spa</title>
   
-  <!-- Tipografías de Alta Costura -->
+  <!-- Tipografías de Lujo Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,600;0,800;0,900;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
   
-  <!-- CDNs Esenciales -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- SheetJS para exportación e importación a Excel -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
   <style>
     :root {
-      --gold-primary: #D4AF37;
-      --gold-light: #F3E5AB;
-      --gold-dark: #AA7C11;
-      --bg-dark: #030406;
-      --card-bg: rgba(13, 16, 23, 0.75);
+      --bg-depth: #090708;
+      --card-base: rgba(22, 18, 20, 0.85);
+      --gold-glow: #d97706;
+      --rose-glow: #f43f5e;
+      --platinum-light: #f8fafc;
     }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+      background: radial-gradient(circle at 50% -20%, #2a1a1d 0%, #120d0f 45%, #080506 100%);
       background-attachment: fixed;
-      color: #e2e8f0;
+      color: #f1f5f9;
     }
 
-    .font-luxury {
+    .font-serif-luxury {
       font-family: 'Cinzel', serif;
     }
 
-    /* Efecto Cristal de Lujo */
-    .glass-panel {
-      background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(212, 175, 55, 0.12);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(18px) scale(0.98); } 
+      to { opacity: 1; transform: translateY(0) scale(1); } 
     }
+    .animate-fade { animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+   
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080506; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #d97706, #f43f5e); border-radius: 6px; }
+    ::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
 
-    .glass-card {
-      background: linear-gradient(135deg, rgba(20, 24, 33, 0.8) 0%, rgba(10, 12, 18, 0.9) 100%);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-card:hover {
-      border-color: rgba(212, 175, 55, 0.45);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.2);
-    }
-
-    /* Texto Gradiente Dorado Metálico */
-    .gold-text {
-      background: linear-gradient(135deg, #FFF 0%, #F3E5AB 25%, #D4AF37 70%, #996B0D 100%);
+    /* TEXTOS TRIDIMENSIONALES DORADO / ORO ROSA */
+    .text-3d-gold {
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 35%, #f59e0b 70%, #78350f 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0px 2px 8px rgba(245, 158, 11, 0.3));
     }
 
-    /* Botón Dorado Alta Gama */
-    .btn-gold {
-      background: linear-gradient(135deg, #D4AF37 0%, #B88E1A 50%, #996B0D 100%);
-      color: #030406;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+    .text-3d-rose {
+      background: linear-gradient(135deg, #ffffff 0%, #fbcfe8 40%, #f43f5e 80%, #881337 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0px 2px 8px rgba(244, 63, 94, 0.3));
     }
 
-    .btn-gold:hover {
-      background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #B88E1A 100%);
-      box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+    /* TARJETAS ULTRA HD 3D GLASSMORPHISM LUXURY */
+    .luxury-3d-card {
+      background: linear-gradient(135deg, rgba(32, 23, 26, 0.75) 0%, rgba(16, 12, 14, 0.9) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 20px 40px -15px rgba(0, 0, 0, 0.85),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(245, 158, 11, 0.05);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .luxury-3d-card:hover {
+      transform: translateY(-8px) rotateX(1deg) scale(1.01);
+      border-color: rgba(245, 158, 11, 0.5);
+      box-shadow: 
+        0 30px 60px -20px rgba(0, 0, 0, 0.95),
+        0 0 30px rgba(245, 158, 11, 0.25),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    }
+
+    /* BOTONES 3D INTERACTIVOS CON REFLEJO ORO Y ORO ROSA */
+    .btn-3d-gold {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #b45309 100%);
+      color: #180e02;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 
+        0 8px 20px -4px rgba(217, 119, 6, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-3d-gold:hover {
+      background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #d97706 100%);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 25px -4px rgba(217, 119, 6, 0.7),
+        0 0 15px rgba(251, 191, 36, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-3d-gold:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-3d-rose {
+      background: linear-gradient(135deg, #fb7185 0%, #f43f5e 50%, #e11d48 100%);
+      color: #2a080e;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 
+        0 8px 20px -4px rgba(244, 63, 94, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-3d-rose:hover {
+      background: linear-gradient(135deg, #fda4af 0%, #fb7185 50%, #f43f5e 100%);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 25px -4px rgba(244, 63, 94, 0.7),
+        0 0 15px rgba(251, 113, 133, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-3d-dark {
+      background: linear-gradient(135deg, rgba(28, 20, 24, 0.9) 0%, rgba(42, 30, 36, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+    }
+
+    .btn-3d-dark:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: linear-gradient(135deg, rgba(42, 30, 36, 0.9) 0%, rgba(65, 45, 55, 0.8) 100%);
       transform: translateY(-1px);
     }
 
-    /* Animaciones suaves */
-    @keyframes fadeIn { 
-      from { opacity: 0; transform: translateY(12px) scale(0.99); } 
-      to { opacity: 1; transform: translateY(0) scale(1); } 
+    /* INPUTS CILÍNDRICOS CON PROFUNDIDAD 3D */
+    .input-3d {
+      background: rgba(12, 9, 10, 0.85) !important;
+      border: 1px solid rgba(245, 158, 11, 0.25) !important;
+      box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      transition: all 0.3s ease !important;
     }
-    .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-    /* Scrollbar personalizada */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #030406; }
-    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 99px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.6); }
+    .input-3d:focus {
+      border-color: #f59e0b !important;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 12px rgba(245, 158, 11, 0.3) !important;
+    }
 
-    /* Estilos de Impresión */
+    /* REGLAS DE IMPRESIÓN PARA IMPRESORA TÉRMICA DE 58MM */
     @media print {
       body * { visibility: hidden !important; }
       #ticket-modal-content, #ticket-modal-content * { visibility: visible !important; }
       #ticket-modal-content {
         position: absolute !important;
-        left: 0 !important; top: 0 !important;
-        width: 58mm !important; margin: 0 !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 58mm !important;
+        margin: 0 !important;
         padding: 2mm 3mm !important;
-        background: #fff !important; color: #000 !important;
-        box-shadow: none !important; border: none !important;
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        border: none !important;
       }
       .no-print { display: none !important; }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased text-slate-300">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- CABECERA ULTRA PREMIUM -->
-  <header class="sticky top-0 z-50 glass-panel border-b border-amber-500/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex flex-wrap justify-between items-center gap-4">
-      
-      <!-- LOGO / BRANDING EDITORIAL -->
+  <!-- Header principal Premium 3D Glassmorphism -->
+  <header class="sticky top-0 z-50 backdrop-blur-2xl bg-stone-950/60 border-b border-amber-500/20 shadow-2xl shadow-black/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap justify-between items-center gap-4">
       <div class="flex items-center gap-3.5">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-[1px] flex items-center justify-center shadow-lg shadow-amber-500/20">
-          <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center">
-            <i data-lucide="crown" class="w-5 h-5 text-amber-400"></i>
-          </div>
+        <div class="p-3 bg-gradient-to-br from-amber-300 via-amber-500 to-rose-500 rounded-2xl shadow-lg shadow-amber-500/20 border border-white/40 transform rotate-3 hover:rotate-0 transition duration-300">
+          <i data-lucide="gem" class="w-6 h-6 text-slate-950 stroke-[2.5]"></i>
         </div>
         <div>
-          <h1 class="text-xl sm:text-2xl font-black font-luxury tracking-widest gold-text uppercase leading-none">
+          <h1 class="text-xl sm:text-2xl font-black font-serif-luxury tracking-wider text-3d-gold">
             ESTÉTICA CAPILAR
           </h1>
-          <p class="text-[9px] tracking-[0.3em] text-amber-300/60 uppercase font-semibold mt-1">Pinamar • Haute Coiffure & Spa</p>
+          <p class="text-[10px] tracking-[0.2em] text-rose-300/80 uppercase font-bold flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span> Pinamar • Haute Coiffure 3D Spa
+          </p>
         </div>
       </div>
 
-      <!-- NAVEGACIÓN PRINCIPAL -->
-      <nav class="flex flex-wrap gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-amber-500/15">
-        <button onclick="switchTab('galeria')" id="btn-galeria" class="tab-btn active px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 btn-gold">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Catálogo
+      <nav class="flex flex-wrap gap-1.5 bg-neutral-950/80 p-1.5 rounded-2xl border border-amber-500/20 shadow-inner">
+        <button onclick="switchTab('galeria')" id="btn-galeria" class="tab-btn active px-4 py-2 rounded-xl text-xs flex items-center gap-2 btn-3d-gold font-extrabold">
+          <i data-lucide="sparkles" class="w-4 h-4"></i> Catálogo
         </button>
-        <button onclick="switchTab('clientes')" id="btn-clientes" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-amber-300 transition flex items-center gap-2">
-          <i data-lucide="users" class="w-3.5 h-3.5"></i> Clientes
+        <button onclick="switchTab('clientes')" id="btn-clientes" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-amber-300 transition flex items-center gap-2">
+          <i data-lucide="users" class="w-4 h-4"></i> Clientes
         </button>
-        <button onclick="switchTab('turnos')" id="btn-turnos" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-amber-300 transition flex items-center gap-2">
-          <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Agenda
+        <button onclick="switchTab('turnos')" id="btn-turnos" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-amber-300 transition flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i> Agenda
         </button>
-        <button onclick="switchTab('caja')" id="btn-caja" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-amber-300 transition flex items-center gap-2">
-          <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i> Caja & Cobros
+        <button onclick="switchTab('caja')" id="btn-caja" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-amber-300 transition flex items-center gap-2">
+          <i data-lucide="dollar-sign" class="w-4 h-4"></i> Caja & Pago
         </button>
-        <button onclick="switchTab('stock')" id="btn-stock" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-amber-300 transition flex items-center gap-2">
-          <i data-lucide="box" class="w-3.5 h-3.5"></i> Inventario
+        <button onclick="switchTab('stock')" id="btn-stock" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-amber-300 transition flex items-center gap-2">
+          <i data-lucide="box" class="w-4 h-4"></i> Stock
         </button>
-        <button onclick="switchTab('respaldo')" id="btn-respaldo" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-amber-300 transition flex items-center gap-2">
-          <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Respaldo
+        <button onclick="switchTab('respaldo')" id="btn-respaldo" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-amber-300 transition flex items-center gap-2">
+          <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Respaldo
         </button>
       </nav>
     </div>
   </header>
 
-  <!-- BANNER EDITORIAL DE ALTA COSTURA -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 w-full">
-    <div class="relative overflow-hidden rounded-3xl border border-amber-500/20 bg-slate-950 h-48 sm:h-56 shadow-2xl shadow-black">
+  <!-- HERO CARRUSEL EDITORIAL 3D -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 w-full">
+    <div class="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-stone-950 h-56 sm:h-64 shadow-2xl shadow-black/80 luxury-3d-card">
       <div id="carousel-slides" class="w-full h-full relative">
-        <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 flex items-center justify-between px-8 sm:px-14 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent z-10">
-          <div class="max-w-xl space-y-2 z-20">
-            <span class="px-3.5 py-1 rounded-full text-[9px] font-bold tracking-[0.25em] uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Lujo & Innovación 2026</span>
-            <h2 class="text-2xl sm:text-3xl font-bold font-luxury text-white">Alisados Orgánicos & Fotónicos</h2>
-            <p class="text-xs text-slate-400 leading-relaxed font-light">Especialización en restauración molecular, brillo espejo y liso continuo sin químicos agresivos.</p>
+        <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 flex items-center justify-between px-8 sm:px-14 bg-gradient-to-r from-stone-950 via-stone-950/90 to-transparent z-10">
+          <div class="max-w-lg space-y-3 z-20">
+            <span class="px-3.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-lg shadow-amber-500/20">Exclusividad 2026</span>
+            <h2 class="text-2xl sm:text-4xl font-black font-serif-luxury text-3d-gold">Alisados Orgánicos & Fotónicos</h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Liso perfecto, brillo espejo y restauración capilar profunda libre de componentes agresivos.</p>
           </div>
-          <div class="absolute right-0 top-0 w-3/5 h-full bg-cover bg-center mix-blend-luminosity opacity-35" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="absolute right-0 top-0 w-3/5 h-full bg-cover bg-center opacity-50 mix-blend-luminosity filter contrast-125 hover:scale-105 transition duration-700" style="background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=1200&auto=format&fit=crop');"></div>
         </div>
-        <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-between px-8 sm:px-14 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent z-10">
-          <div class="max-w-xl space-y-2 z-20">
-            <span class="px-3.5 py-1 rounded-full text-[9px] font-bold tracking-[0.25em] uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Haute Coiffure</span>
-            <h2 class="text-2xl sm:text-3xl font-bold font-luxury text-white">Balayage & Contour Iluminación</h2>
-            <p class="text-xs text-slate-400 leading-relaxed font-light">Técnicas europeas de decoloración consciente, tonalización tridimensional y máxima nutrición.</p>
+        <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-between px-8 sm:px-14 bg-gradient-to-r from-stone-950 via-stone-950/90 to-transparent z-10">
+          <div class="max-w-lg space-y-3 z-20">
+            <span class="px-3.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-lg shadow-rose-500/20">Haute Coiffure</span>
+            <h2 class="text-2xl sm:text-4xl font-black font-serif-luxury text-3d-rose">Balayage & Iluminación Contour</h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Degradados naturales, tonos tridimensionales y máxima protección de la fibra capilar.</p>
           </div>
-          <div class="absolute right-0 top-0 w-3/5 h-full bg-cover bg-center mix-blend-luminosity opacity-35" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="absolute right-0 top-0 w-3/5 h-full bg-cover bg-center opacity-50 mix-blend-luminosity filter contrast-125 hover:scale-105 transition duration-700" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200&auto=format&fit=crop');"></div>
         </div>
-        <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-between px-8 sm:px-14 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent z-10">
-          <div class="max-w-xl space-y-2 z-20">
-            <span class="px-3.5 py-1 rounded-full text-[9px] font-bold tracking-[0.25em] uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Spa Capilar Privado</span>
-            <h2 class="text-2xl sm:text-3xl font-bold font-luxury text-white">Botox Capilar & Cauterización</h2>
-            <p class="text-xs text-slate-400 leading-relaxed font-light">Tratamientos intensivos de hidratación con biotecnología aplicada a la fibra capilar.</p>
+        <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-between px-8 sm:px-14 bg-gradient-to-r from-stone-950 via-stone-950/90 to-transparent z-10">
+          <div class="max-w-lg space-y-3 z-20">
+            <span class="px-3.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-lg shadow-amber-500/20">Spa Capilar Detox</span>
+            <h2 class="text-2xl sm:text-4xl font-black font-serif-luxury text-3d-gold">Botox Capilar & Cauterización</h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Tratamientos intensivos de hidratación con nanotecnología para devolver vitalidad y suavidad.</p>
           </div>
-          <div class="absolute right-0 top-0 w-3/5 h-full bg-cover bg-center mix-blend-luminosity opacity-35" style="background-image: url('https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="absolute right-0 top-0 w-3/5 h-full bg-cover bg-center opacity-50 mix-blend-luminosity filter contrast-125 hover:scale-105 transition duration-700" style="background-image: url('https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=1200&auto=format&fit=crop');"></div>
         </div>
       </div>
       <div class="absolute bottom-5 right-8 z-30 flex gap-2">
-        <button onclick="setSlide(0)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-amber-400 transition-all"></button>
-        <button onclick="setSlide(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-slate-700 transition-all"></button>
-        <button onclick="setSlide(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-slate-700 transition-all"></button>
+        <button onclick="setSlide(0)" class="carousel-dot w-3.5 h-3.5 rounded-full bg-amber-400 shadow-md shadow-amber-500/50 transition-all"></button>
+        <button onclick="setSlide(1)" class="carousel-dot w-3.5 h-3.5 rounded-full bg-stone-800 transition-all"></button>
+        <button onclick="setSlide(2)" class="carousel-dot w-3.5 h-3.5 rounded-full bg-stone-800 transition-all"></button>
       </div>
     </div>
   </section>
 
-  <!-- CONTENIDO PRINCIPAL DINÁMICO -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-6 w-full mb-auto">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full mb-auto">
 
-    <!-- TAB: CATÁLOGO DE SERVICIOS -->
-    <section id="tab-galeria" class="tab-content animate-fade-in space-y-6">
-      <div class="glass-panel p-5 rounded-3xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <!-- CATÁLOGO DE TRATAMIENTOS CAPILARES -->
+    <section id="tab-galeria" class="tab-content animate-fade space-y-6">
+      <div class="luxury-3d-card p-6 rounded-3xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 class="text-xl font-bold font-luxury gold-text flex items-center gap-2">
-            <i data-lucide="gem" class="text-amber-400 w-5 h-5"></i> Menú de Experiencias Capilares
+          <h2 class="text-xl sm:text-2xl font-black font-serif-luxury text-3d-gold flex items-center gap-2">
+            <i data-lucide="sparkles" class="text-amber-400 w-6 h-6"></i> Menú de Experiencias Capilares Ultra HD
           </h2>
-          <p class="text-xs text-slate-400 mt-1 font-light">Explora y selecciona tratamientos para agendar citas de forma automatizada.</p>
+          <p class="text-xs text-slate-400 mt-1">Selecciona los tratamientos exclusivos para integrarlos directamente a la cita VIP.</p>
         </div>
-        <div class="flex items-center gap-3 w-full sm:w-auto">
-          <div class="relative w-full sm:w-64">
-            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"></i>
-            <input type="text" id="buscar-galeria" oninput="filtrarGaleria()" placeholder="Buscar tratamiento..." class="w-full bg-slate-950/90 border border-amber-500/20 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-slate-200 outline-none focus:border-amber-400/60 transition">
-          </div>
-          <button onclick="switchTab('turnos')" class="px-5 py-2.5 btn-gold rounded-2xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap">
-            <i data-lucide="calendar" class="w-4 h-4"></i> Agendar (<span id="cant-seleccionados-badge">0</span>)
-          </button>
-        </div>
+        <button onclick="switchTab('turnos')" class="px-6 py-3 btn-3d-gold rounded-2xl text-xs font-black transition flex items-center gap-2.5">
+          <i data-lucide="calendar-check" class="w-4 h-4"></i> Ir a Agendar (<span id="cant-seleccionados-badge">0</span>)
+        </button>
       </div>
-      <div id="grid-galeria" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+      <div id="grid-galeria" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Render dinámico -->
+      </div>
     </section>
 
-    <!-- TAB: DIRECTORIODE CLIENTES -->
-    <section id="tab-clientes" class="tab-content hidden animate-fade-in space-y-6">
+    <!-- CLIENTES -->
+    <section id="tab-clientes" class="tab-content hidden animate-fade space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="glass-panel p-6 rounded-3xl space-y-4">
-          <h3 class="text-base font-bold font-luxury gold-text flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4 text-amber-400"></i> Registrar Cliente VIP</h3>
+        <div class="luxury-3d-card p-6 rounded-3xl space-y-4">
+          <h3 class="text-base font-bold text-3d-gold flex items-center gap-2"><i data-lucide="user-plus" class="w-5 h-5 text-amber-400"></i> Registrar Cliente VIP</h3>
           <form id="form-cliente" class="space-y-4">
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Nombre y Apellido</label>
-              <input type="text" id="cli-nombre" placeholder="Ej. Ana María Rossi" required class="w-full bg-slate-950/90 border border-amber-500/20 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-amber-400">
-            </div>
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Teléfono / WhatsApp</label>
-              <input type="tel" id="cli-telefono" placeholder="Ej. +54 9 2254 000000" required class="w-full bg-slate-950/90 border border-amber-500/20 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-amber-400">
-            </div>
-            <button type="submit" class="w-full py-3 btn-gold rounded-xl text-xs font-bold transition">Guardar Cliente en Sistema</button>
+            <input type="text" id="cli-nombre" placeholder="Nombre y Apellido" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+            <input type="tel" id="cli-telefono" placeholder="WhatsApp / Teléfono de contacto" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+            <button type="submit" class="w-full py-3.5 btn-3d-gold rounded-2xl text-xs font-black transition">Guardar Registro VIP</button>
           </form>
         </div>
-        <div class="lg:col-span-2 glass-panel p-6 rounded-3xl space-y-4">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-            <h3 class="text-base font-bold text-slate-200 font-luxury flex items-center gap-2"><i data-lucide="users" class="w-4 h-4 text-amber-400"></i> Directorio VIP</h3>
-            <div class="flex items-center gap-3 w-full sm:w-auto">
-              <input type="text" id="buscar-cliente" oninput="cargarClientes()" placeholder="Buscar cliente..." class="bg-slate-950/90 border border-amber-500/20 rounded-xl px-3.5 py-2 text-xs text-slate-200 outline-none focus:border-amber-400 w-full sm:w-48">
-              <button onclick="exportarClientesExcel()" class="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-semibold transition flex items-center gap-2 whitespace-nowrap">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> Exportar Excel
-              </button>
-            </div>
+        <div class="lg:col-span-2 luxury-3d-card p-6 rounded-3xl space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="text-base font-bold text-slate-100 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-rose-400"></i> Directorio Exclusivo</h3>
+            <button onclick="exportarClientesExcel()" class="px-4 py-2.5 btn-3d-dark text-amber-300 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+              <i data-lucide="download" class="w-4 h-4"></i> Exportar Clientes (.xlsx)
+            </button>
           </div>
-          <div id="lista-clientes" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[420px] overflow-y-auto pr-1"></div>
+          <div id="lista-clientes" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[440px] overflow-y-auto pr-1"></div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: AGENDA AUTOMÁTICA CON HORARIOS -->
-    <section id="tab-turnos" class="tab-content hidden animate-fade-in space-y-6">
+    <!-- AGENDA -->
+    <section id="tab-turnos" class="tab-content hidden animate-fade space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="glass-panel p-6 rounded-3xl space-y-4">
-          <h3 class="text-base font-bold font-luxury gold-text flex items-center gap-2"><i data-lucide="calendar-plus" class="w-4 h-4 text-amber-400"></i> Agendar Cita VIP</h3>
+        <div class="luxury-3d-card p-6 rounded-3xl space-y-4">
+          <h3 class="text-base font-bold text-3d-rose flex items-center gap-2"><i data-lucide="calendar-plus" class="w-5 h-5 text-rose-400"></i> Agendar Cita VIP</h3>
           <form id="form-turno" class="space-y-4">
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Seleccionar Cliente</label>
-              <select id="turno-cliente" required class="w-full bg-slate-950/90 border border-amber-500/20 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-amber-400">
-                <option value="">Cargando lista de clientes...</option>
-              </select>
-            </div>
+            <select id="turno-cliente" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+              <option value="">Seleccionar Cliente</option>
+            </select>
 
-            <div class="space-y-2 bg-slate-950/80 p-3.5 rounded-2xl border border-amber-500/15">
+            <!-- SELECCIÓN MÚLTIPLE DE TRATAMIENTOS -->
+            <div class="space-y-3 bg-stone-950/70 p-4 rounded-2xl border border-amber-500/20 shadow-inner">
               <div class="flex justify-between items-center">
-                <label class="block text-[10px] font-bold text-amber-300 uppercase tracking-widest">Tratamientos Seleccionados</label>
-                <button type="button" onclick="limpiarOpciones()" class="text-[10px] text-slate-400 hover:text-rose-400">Limpiar Todo</button>
+                <label class="block text-[10px] font-black text-amber-300 uppercase tracking-widest">Tratamientos Seleccionados</label>
+                <button type="button" onclick="limpiarOpciones()" class="text-[10px] text-slate-400 hover:text-rose-300">Limpiar todo</button>
               </div>
              
-              <div id="lista-opciones-seleccionadas" class="space-y-1.5 max-h-32 overflow-y-auto pr-1 text-xs">
-                <span class="text-slate-500 text-[11px] italic">No hay servicios añadidos aún...</span>
+              <div id="lista-opciones-seleccionadas" class="space-y-2 max-h-32 overflow-y-auto pr-1 text-xs">
+                <span class="text-slate-500 text-[11px] italic">Ningún servicio añadido aún...</span>
               </div>
 
-              <select id="select-agregar-opcion" onchange="agregarOpcionServicio(this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 outline-none focus:border-amber-400">
-                <option value="">+ Añadir servicio al paquete...</option>
+              <select id="select-agregar-opcion" onchange="agregarOpcionServicio(this.value)" class="input-3d w-full rounded-xl px-3 py-2 text-xs text-slate-300 outline-none">
+                <option value="">+ Añadir otro servicio capilar...</option>
               </select>
 
-              <div class="pt-2 border-t border-slate-800/80 flex justify-between items-center font-bold text-xs">
+              <div class="pt-2 border-t border-stone-800 flex justify-between items-center font-bold text-xs">
                 <span class="text-slate-400">Total Estimado:</span>
-                <span class="text-emerald-400 font-mono text-sm">$<span id="monto-total-turnos">0.00</span></span>
+                <span class="text-amber-400 font-mono text-sm">$<span id="monto-total-turnos">0.00</span></span>
               </div>
             </div>
 
-            <div class="space-y-2 bg-slate-950/80 p-3.5 rounded-2xl border border-amber-500/15">
-              <label class="block text-[10px] font-bold text-amber-300 uppercase tracking-widest">Fecha & Horario Disponible</label>
+            <!-- FECHA Y HORA AUTOMATIZADA -->
+            <div class="space-y-3 bg-stone-950/70 p-4 rounded-2xl border border-amber-500/20 shadow-inner">
+              <label class="block text-[10px] font-black text-rose-300 uppercase tracking-widest">Fecha & Horario</label>
              
               <div class="flex gap-2">
-                <input type="date" id="turno-fecha-dia" required onchange="actualizarBotonHorario()" class="w-1/2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-amber-400">
-                <button type="button" onclick="toggleSelectorHorarios()" id="btn-mostrar-horarios" class="w-1/2 bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 rounded-xl px-2 py-2 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                <input type="date" id="turno-fecha-dia" required onchange="actualizarBotonHorario()" class="input-3d w-1/2 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none">
+                <button type="button" onclick="toggleSelectorHorarios()" id="btn-mostrar-horarios" class="w-1/2 btn-3d-dark text-amber-300 rounded-xl px-2 py-2 text-xs font-bold transition flex items-center justify-center gap-1.5">
                   <i data-lucide="clock" class="w-3.5 h-3.5"></i> <span id="lbl-hora-seleccionada">Elegir Hora</span>
                 </button>
               </div>
               <input type="hidden" id="turno-hora-val" required>
 
-              <div id="panel-horarios" class="hidden bg-slate-900/95 border border-slate-800 rounded-xl p-3 space-y-2">
+              <div id="panel-horarios" class="hidden bg-stone-950 border border-amber-500/30 rounded-2xl p-3 space-y-2 shadow-2xl">
                 <p class="text-[10px] text-slate-400 font-medium">Horarios Disponibles:</p>
-                <div id="grid-horas" class="grid grid-cols-3 gap-1.5 max-h-36 overflow-y-auto pr-1"></div>
+                <div id="grid-horas" class="grid grid-cols-3 gap-2 max-h-36 overflow-y-auto pr-1"></div>
               </div>
             </div>
            
-            <button type="submit" class="w-full py-3 btn-gold rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20">
-              <i data-lucide="ticket" class="w-4 h-4"></i> Confirmar Cita & Emitir Ticket
+            <button type="submit" class="w-full py-3.5 btn-3d-rose rounded-2xl text-xs font-black transition flex items-center justify-center gap-2">
+              <i data-lucide="ticket" class="w-4 h-4"></i> Confirmar y Generar Comprobante 3D
             </button>
           </form>
         </div>
 
-        <div class="lg:col-span-2 glass-panel p-6 rounded-3xl space-y-4">
-          <h3 class="text-base font-bold text-slate-200 font-luxury flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-amber-400"></i> Citas Programadas</h3>
+        <div class="lg:col-span-2 luxury-3d-card p-6 rounded-3xl space-y-4">
+          <h3 class="text-base font-bold text-slate-100 flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5 text-amber-400"></i> Citas Programadas</h3>
           <div id="lista-turnos" class="space-y-3 max-h-[440px] overflow-y-auto pr-1"></div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: CAJA Y REGISTRO FINANCIERO -->
-    <section id="tab-caja" class="tab-content hidden animate-fade-in space-y-6">
+    <!-- CAJA -->
+    <section id="tab-caja" class="tab-content hidden animate-fade space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="glass-panel p-6 rounded-3xl space-y-4">
-          <h3 class="text-base font-bold text-emerald-400 font-luxury flex items-center gap-2"><i data-lucide="plus-circle" class="w-4 h-4"></i> Registrar Cobro de Servicio</h3>
+        <div class="luxury-3d-card p-6 rounded-3xl space-y-4">
+          <h3 class="text-base font-bold text-amber-400 flex items-center gap-2"><i data-lucide="plus-circle" class="w-5 h-5"></i> Cobro de Servicios</h3>
           <form id="form-pago" class="space-y-4">
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Concepto / Servicio</label>
-              <input type="text" id="pago-concepto" placeholder="Ej. Alisado Orgánico + Nutrición" required class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-emerald-500">
-            </div>
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Monto Total ($ ARS)</label>
-              <input type="number" id="pago-monto" step="0.01" placeholder="Ej. 45000" required class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-emerald-500">
-            </div>
-            <button type="submit" class="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
-              <i data-lucide="ticket" class="w-4 h-4"></i> Procesar Cobro & Generar Recibo
+            <input type="text" id="pago-concepto" placeholder="Concepto del servicio" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+            <input type="number" id="pago-monto" step="0.01" placeholder="Monto Total ($)" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+            <button type="submit" class="w-full py-3.5 btn-3d-gold rounded-2xl text-xs font-black transition flex items-center justify-center gap-2">
+              <i data-lucide="ticket" class="w-4 h-4"></i> Registrar Pago y Emitir Ticket
             </button>
           </form>
         </div>
-        <div class="lg:col-span-2 glass-panel p-6 rounded-3xl space-y-4">
-          <div class="flex justify-between items-center bg-slate-950/90 p-5 rounded-2xl border border-amber-500/20">
+        <div class="lg:col-span-2 luxury-3d-card p-6 rounded-3xl space-y-5">
+          <div class="flex justify-between items-center bg-stone-950/80 p-6 rounded-2xl border border-amber-500/20 shadow-inner">
             <div>
-              <span class="text-[10px] text-amber-300/80 uppercase tracking-[0.2em] font-bold">Balance Automatizado en Caja</span>
-              <p class="text-3xl font-black text-emerald-400 font-mono mt-1">$<span id="total-caja">0.00</span></p>
+              <span class="text-[10px] text-amber-300/80 uppercase tracking-widest font-black">Balance General en Caja</span>
+              <p class="text-3xl font-black text-amber-400 font-mono tracking-tight">$<span id="total-caja">0.00</span></p>
             </div>
-            <button onclick="cerrarCaja()" class="px-5 py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold transition flex items-center gap-2">
+            <button onclick="cerrarCaja()" class="px-5 py-3 btn-3d-dark text-rose-300 rounded-2xl text-xs font-bold transition flex items-center gap-2">
               <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Cierre de Caja (Excel)
             </button>
           </div>
-          <div id="lista-pagos" class="space-y-2.5 max-h-[340px] overflow-y-auto pr-1"></div>
+          <div id="lista-pagos" class="space-y-3 max-h-[340px] overflow-y-auto pr-1"></div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: INVENTARIO DE INSUMOS -->
-    <section id="tab-stock" class="tab-content hidden animate-fade-in space-y-6">
+    <!-- STOCK -->
+    <section id="tab-stock" class="tab-content hidden animate-fade space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="glass-panel p-6 rounded-3xl space-y-4">
-          <h3 class="text-base font-bold text-amber-400 font-luxury flex items-center gap-2"><i data-lucide="package-plus" class="w-4 h-4"></i> Nuevo Insumo</h3>
+        <div class="luxury-3d-card p-6 rounded-3xl space-y-4">
+          <h3 class="text-base font-bold text-rose-400 flex items-center gap-2"><i data-lucide="package-plus" class="w-5 h-5"></i> Registro de Insumos</h3>
           <form id="form-stock" class="space-y-4">
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Nombre del Producto</label>
-              <input type="text" id="stock-nombre" placeholder="Ej. Olaplex N°3 Bond Protector" required class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-amber-400">
-            </div>
-            <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Unidades en Stock</label>
-              <input type="number" id="stock-cant" placeholder="Ej. 12" required class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 outline-none focus:border-amber-400">
-            </div>
-            <button type="submit" class="w-full py-3 btn-gold font-bold rounded-xl text-xs transition">Guardar en Inventario</button>
+            <input type="text" id="stock-nombre" placeholder="Insumo (ej. Olaplex N°3, Tintura 8.1)" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+            <input type="number" id="stock-cant" placeholder="Unidades / Stock" required class="input-3d w-full rounded-2xl px-4 py-3 text-xs text-slate-200 outline-none">
+            <button type="submit" class="w-full py-3.5 btn-3d-rose rounded-2xl text-xs font-black transition">Guardar Insumo</button>
           </form>
         </div>
-        <div class="lg:col-span-2 glass-panel p-6 rounded-3xl space-y-4">
-          <h3 class="text-base font-bold text-slate-200 font-luxury flex items-center gap-2"><i data-lucide="boxes" class="w-4 h-4 text-amber-400"></i> Inventario de Insumos & Productos</h3>
-          <div id="lista-stock" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[420px] overflow-y-auto pr-1"></div>
+        <div class="lg:col-span-2 luxury-3d-card p-6 rounded-3xl space-y-4">
+          <h3 class="text-base font-bold text-slate-100 flex items-center gap-2"><i data-lucide="boxes" class="w-5 h-5 text-amber-400"></i> Inventario de Productos Capilares</h3>
+          <div id="lista-stock" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[440px] overflow-y-auto pr-1"></div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: RESPALDO DE DATOS CON EXCEL -->
-    <section id="tab-respaldo" class="tab-content hidden animate-fade-in">
-      <div class="glass-panel p-8 rounded-3xl max-w-xl mx-auto text-center space-y-6 border border-amber-500/20">
-        <div class="w-16 h-16 bg-amber-500/10 text-amber-300 rounded-2xl mx-auto flex items-center justify-center border border-amber-500/30">
-          <i data-lucide="file-spreadsheet" class="w-8 h-8"></i>
+    <!-- RESPALDO EXCEL EXCLUSIVO -->
+    <section id="tab-respaldo" class="tab-content hidden animate-fade">
+      <div class="luxury-3d-card p-8 sm:p-12 rounded-3xl max-w-xl mx-auto text-center space-y-6">
+        <div class="p-5 bg-gradient-to-br from-amber-500/20 to-rose-500/20 text-amber-300 rounded-3xl w-20 h-20 mx-auto flex items-center justify-center border border-amber-500/40 shadow-xl shadow-amber-500/10">
+          <i data-lucide="file-spreadsheet" class="w-10 h-10"></i>
         </div>
         <div>
-          <h2 class="text-2xl font-bold font-luxury gold-text">Respaldo Integral Automatizado</h2>
-          <p class="text-xs text-slate-400 mt-1 font-light">Exportación e importación directa compatible con Microsoft Excel (.xlsx).</p>
+          <h2 class="text-2xl font-black font-serif-luxury text-3d-gold">Respaldo Integral en Excel</h2>
+          <p class="text-xs text-slate-400 mt-2">Gestión directa de bases de datos de clientes, historial de turnos y finanzas en hojas de cálculo (.xlsx).</p>
         </div>
 
-        <div class="bg-slate-950/90 p-5 rounded-2xl border border-amber-500/15 text-left space-y-3">
-          <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
-            <i data-lucide="download" class="w-4 h-4"></i> Exportar Base de Datos Consolidada
+        <div class="bg-stone-950/80 p-5 rounded-2xl border border-amber-500/20 text-left space-y-3">
+          <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
+            <i data-lucide="download" class="w-4 h-4"></i> Exportar Informe Consolidado
           </h4>
-          <button onclick="exportarExcel()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10">
-            <i data-lucide="file-output" class="w-4 h-4"></i> Descargar Informe Completo (.xlsx)
+          <button onclick="exportarExcel()" class="w-full py-3.5 btn-3d-gold rounded-2xl text-xs font-black transition flex items-center justify-center gap-2">
+            <i data-lucide="file-output" class="w-4 h-4"></i> Descargar Respaldo General (.xlsx)
           </button>
         </div>
 
-        <div class="bg-slate-950/90 p-5 rounded-2xl border border-amber-500/15 text-left space-y-3">
-          <h4 class="text-xs font-bold text-amber-300 uppercase tracking-widest flex items-center gap-2">
+        <div class="bg-stone-950/80 p-5 rounded-2xl border border-amber-500/20 text-left space-y-3">
+          <h4 class="text-xs font-bold text-rose-300 uppercase tracking-widest flex items-center gap-2">
             <i data-lucide="upload" class="w-4 h-4"></i> Carga Masiva de Clientes
           </h4>
-          <p class="text-[11px] text-slate-400 font-light">Importa una planilla Excel con columnas "Nombre" y "Teléfono".</p>
+          <p class="text-[11px] text-slate-400">Importa clientes desde un archivo Excel con encabezados "Nombre" y "Teléfono".</p>
           <input type="file" id="import-excel-file" onchange="importarClientesExcel(event)" accept=".xlsx, .xls" class="hidden">
-          <button onclick="document.getElementById('import-excel-file').click()" class="w-full py-3 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2">
-            <i data-lucide="file-input" class="w-4 h-4"></i> Seleccionar Archivo Excel (.xlsx)
+          <button onclick="document.getElementById('import-excel-file').click()" class="w-full py-3.5 btn-3d-dark text-amber-300 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2">
+            <i data-lucide="file-input" class="w-4 h-4"></i> Seleccionar Planilla de Clientes (.xlsx)
           </button>
         </div>
       </div>
@@ -406,28 +449,34 @@
 
   </main>
 
-  <!-- MODAL DE TICKET DE IMPRESIÓN (58MM) -->
-  <div id="modal-ticket" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-white text-slate-950 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-200 space-y-4 animate-fade-in" id="ticket-modal-content">
-      
+  <!-- MODAL TICKET 58MM ELEGANTE CON EFECTO GLASS 3D -->
+  <div id="modal-ticket" class="hidden fixed inset-0 bg-stone-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-white text-slate-950 rounded-3xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-200 space-y-4 animate-fade" id="ticket-modal-content">
+     
+      <!-- Encabezado del Ticket -->
       <div class="text-center border-b border-dashed border-slate-300 pb-3">
-        <h2 class="text-base font-black uppercase tracking-wider text-slate-900 font-luxury">ESTÉTICA CAPILAR</h2>
-        <p class="text-[9px] font-bold text-amber-800 tracking-widest uppercase">PINAMAR • HAUTE COIFFURE</p>
-        <p id="modal-ticket-subtitulo" class="text-[10px] font-bold text-slate-500 tracking-widest uppercase mt-1">COMPROBANTE OFICIAL</p>
+        <h2 class="text-base font-black uppercase tracking-wider text-slate-900 font-serif-luxury">ESTÉTICA CAPILAR</h2>
+        <p class="text-[9px] font-black text-amber-700 tracking-widest uppercase">PINAMAR • HAUTE COIFFURE 3D</p>
+        <p id="modal-ticket-subtitulo" class="text-[10px] font-bold text-slate-500 tracking-widest uppercase mt-1">COMPROBANTE DE RESERVA</p>
       </div>
 
-      <div id="modal-ticket-body" class="font-mono text-xs space-y-2"></div>
+      <!-- Detalle Dinámico -->
+      <div id="modal-ticket-body" class="font-mono text-xs space-y-2">
+        <!-- Contenido generado por JS -->
+      </div>
 
+      <!-- Pie del Ticket -->
       <div class="border-t border-dashed border-slate-300 pt-3 text-center font-mono text-[10px] text-slate-500">
-        <p>¡Gracias por su visita exclusiva!</p>
+        <p>¡Gracias por elegir una experiencia VIP!</p>
         <p class="font-bold text-slate-800">Estética Capilar Pinamar</p>
       </div>
 
+      <!-- Botones de Acción -->
       <div class="no-print pt-2 flex gap-2">
-        <button onclick="window.print()" class="flex-1 py-2.5 bg-slate-950 text-amber-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md">
-          <i data-lucide="printer" class="w-4 h-4"></i> Imprimir Ticket (58mm)
+        <button onclick="window.print()" class="flex-1 py-3 bg-stone-950 text-amber-400 rounded-2xl text-xs font-black transition flex items-center justify-center gap-1.5 shadow-lg">
+          <i data-lucide="printer" class="w-4 h-4"></i> Imprimir (58mm)
         </button>
-        <button onclick="cerrarModalTicket()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-semibold transition">
+        <button onclick="cerrarModalTicket()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-2xl text-xs font-bold transition">
           Cerrar
         </button>
       </div>
@@ -435,14 +484,14 @@
     </div>
   </div>
 
-  <!-- PIE DE PÁGINA EDITORIAL -->
-  <footer class="border-t border-amber-500/10 bg-slate-950/90 py-5 text-center text-xs text-slate-500 backdrop-blur-lg">
-    <p class="font-bold font-luxury gold-text tracking-widest">Global System Marcelo Muraña</p>
-    <p class="text-[10px] text-slate-600 mt-1">Plataforma Ejecutiva de Gestión para Salones de Alta Costura & Spas Capilares</p>
+  <!-- Footer Editorial 3D -->
+  <footer class="border-t border-amber-500/10 bg-stone-950/80 py-6 text-center text-xs text-slate-500 backdrop-blur-md">
+    <p class="font-bold font-serif-luxury text-3d-gold tracking-wider text-sm">Global System Marcelo Muraña</p>
+    <p class="text-[10px] text-slate-500 mt-1">Software Ultra HD 3D de Alta Gama para Gestión de Centros de Estética Capilar & Salones VIP</p>
   </footer>
 
-  <!-- SCRIPT CON LÓGICA AUTOMATIZADA INTEGRAL -->
   <script>
+    // 27 TRATAMIENTOS CAPILARES CON IMÁGENES DEDICADAS DE UNSPLASH
     const ESTILOS_BASE = [
       { id: 1, nombre: "Alisado Orgánico Sin Formol", cat: "Alisados", precio: 45000, imgBackup: "https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600&auto=format&fit=crop" },
       { id: 2, nombre: "Balayage Personalizado + Tonalizador", cat: "Color", precio: 65000, imgBackup: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop" },
@@ -479,10 +528,9 @@
     ];
 
     let opcionesSeleccionadas = [];
-    let db;
 
-    // INICIALIZAR BASE DE DATOS LOCAL
-    const req = indexedDB.open("HairStudioLuxuryDB", 3);
+    let db;
+    const req = indexedDB.open("HairStudioLuxuryDB", 2);
 
     req.onupgradeneeded = (e) => {
       db = e.target.result;
@@ -495,7 +543,9 @@
 
     req.onsuccess = (e) => {
       db = e.target.result;
-      document.getElementById("turno-fecha-dia").value = new Date().toISOString().split('T')[0];
+     
+      const hoyStr = new Date().toISOString().split('T')[0];
+      document.getElementById("turno-fecha-dia").value = hoyStr;
 
       poblarSelectOpciones();
       renderGaleria();
@@ -506,34 +556,33 @@
       lucide.createIcons();
     };
 
-    // BANNER AUTOMÁTICO
+    // CARRUSEL
     let currentSlide = 0;
     function setSlide(index) {
       const slides = document.querySelectorAll('.carousel-slide');
       const dots = document.querySelectorAll('.carousel-dot');
       slides.forEach((s, i) => { s.style.opacity = (i === index) ? '1' : '0'; });
-      dots.forEach((d, i) => { d.className = `carousel-dot w-2.5 h-2.5 rounded-full transition-all ${i === index ? 'bg-amber-400' : 'bg-slate-700'}`; });
+      dots.forEach((d, i) => { d.className = `carousel-dot w-3.5 h-3.5 rounded-full transition-all ${i === index ? 'bg-amber-400 shadow-md shadow-amber-500/50' : 'bg-stone-800'}`; });
       currentSlide = index;
     }
     setInterval(() => { setSlide((currentSlide + 1) % 3); }, 5000);
 
-    // CAMBIO DE PESTAÑAS
     function switchTab(tab) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('btn-gold');
-        b.classList.add('text-slate-400');
+        b.classList.remove('btn-3d-gold', 'font-extrabold');
+        b.classList.add('text-slate-300');
       });
       document.getElementById(`tab-${tab}`).classList.remove('hidden');
       const active = document.getElementById(`btn-${tab}`);
-      active.classList.add('btn-gold');
-      active.classList.remove('text-slate-400');
+      active.classList.add('btn-3d-gold', 'font-extrabold');
+      active.classList.remove('text-slate-300');
     }
 
-    // GESTIÓN DINÁMICA DE OPCIONES
+    // OPCIONES MÚLTIPLES DE SERVICIOS
     function poblarSelectOpciones() {
       const select = document.getElementById("select-agregar-opcion");
-      select.innerHTML = '<option value="">+ Añadir servicio al paquete...</option>';
+      select.innerHTML = '<option value="">+ Añadir otro servicio capilar...</option>';
       ESTILOS_BASE.forEach(e => {
         select.innerHTML += `<option value="${e.id}">${e.nombre} - $${e.precio.toLocaleString('es-AR')}</option>`;
       });
@@ -567,7 +616,7 @@
       badge.textContent = opcionesSeleccionadas.length;
 
       if (opcionesSeleccionadas.length === 0) {
-        cont.innerHTML = `<span class="text-slate-500 text-[11px] italic">No hay servicios añadidos aún...</span>`;
+        cont.innerHTML = `<span class="text-slate-500 text-[11px] italic">Ningún servicio añadido aún...</span>`;
         totalEl.textContent = "0.00";
         return;
       }
@@ -577,10 +626,10 @@
       opcionesSeleccionadas.forEach(o => {
         total += o.precio;
         cont.innerHTML += `
-          <div class="flex justify-between items-center bg-slate-900/90 border border-amber-500/15 px-3 py-1.5 rounded-xl">
-            <span class="truncate text-slate-200">${o.nombre}</span>
+          <div class="flex justify-between items-center bg-stone-900/90 border border-amber-500/20 px-3 py-2 rounded-xl">
+            <span class="truncate text-slate-200 font-medium">${o.nombre}</span>
             <div class="flex items-center gap-2">
-              <span class="text-amber-300 font-semibold font-mono">$${o.precio.toLocaleString('es-AR')}</span>
+              <span class="text-amber-300 font-bold font-mono">$${o.precio.toLocaleString('es-AR')}</span>
               <button type="button" onclick="removerOpcion(${o.id})" class="text-slate-500 hover:text-rose-400 font-bold px-1">✕</button>
             </div>
           </div>`;
@@ -589,54 +638,44 @@
       totalEl.textContent = total.toLocaleString('es-AR', { minimumFractionDigits: 2 });
     }
 
-    // RENDERING DEL CATÁLOGOCON TARJETAS PREMIUM
+    // GALERÍA LUXURY ULTRA HD 3D
     function renderGaleria() {
-      filtrarGaleria();
-    }
-
-    function filtrarGaleria() {
       const grid = document.getElementById("grid-galeria");
-      const filtro = document.getElementById("buscar-galeria").value.toLowerCase();
       grid.innerHTML = "";
 
       db.transaction("fotos").objectStore("fotos").getAll().onsuccess = (e) => {
         const fotosPersonalizadas = {};
         e.target.result.forEach(f => fotosPersonalizadas[f.id] = f.src);
 
-        const filtrados = ESTILOS_BASE.filter(estilo => 
-          estilo.nombre.toLowerCase().includes(filtro) || estilo.cat.toLowerCase().includes(filtro)
-        );
-
-        filtrados.forEach(estilo => {
+        ESTILOS_BASE.forEach(estilo => {
           const fotoCustom = fotosPersonalizadas[estilo.id];
           const fotoRuta = fotoCustom || `./img/${estilo.id}.jpg`;
 
           grid.innerHTML += `
-            <div class="glass-card rounded-3xl p-3.5 flex flex-col justify-between">
+            <div class="luxury-3d-card rounded-3xl p-4 flex flex-col justify-between group">
               <div class="space-y-3">
-                <div class="relative h-40 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center border border-amber-500/10 group">
+                <div class="relative h-44 rounded-2xl overflow-hidden bg-stone-950 flex items-center justify-center border border-amber-500/20 shadow-inner">
                   <img src="${fotoRuta}" 
                        alt="${estilo.nombre}" 
-                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                        onerror="this.onerror=null; this.src='${estilo.imgBackup}';">
-                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-                  <span class="absolute top-2.5 right-2.5 bg-slate-950/90 backdrop-blur-md px-2.5 py-1 rounded-xl text-[11px] font-bold text-amber-300 border border-amber-500/30 font-mono shadow-md">
+                  <span class="absolute top-3 right-3 bg-stone-950/85 backdrop-blur-md px-3 py-1 rounded-xl text-[11px] font-black text-amber-300 border border-amber-500/30 font-mono shadow-lg">
                     $${estilo.precio.toLocaleString('es-AR')}
                   </span>
                 </div>
                 <div>
-                  <span class="text-[9px] uppercase tracking-[0.2em] font-bold text-amber-400/90">${estilo.cat}</span>
-                  <h4 class="font-bold text-xs text-white truncate font-luxury mt-0.5">${estilo.nombre}</h4>
+                  <span class="text-[9px] uppercase tracking-widest font-black text-rose-400">${estilo.cat}</span>
+                  <h4 class="font-bold text-xs text-white truncate font-serif-luxury">${estilo.nombre}</h4>
                 </div>
               </div>
-              <div class="pt-3 space-y-2">
+              <div class="pt-4 space-y-2">
                 <div class="flex gap-2">
-                  <button onclick="agregarDesdeGaleria(${estilo.id})" class="flex-1 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1">
+                  <button onclick="agregarDesdeGaleria(${estilo.id})" class="flex-1 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-[11px] font-bold transition flex items-center justify-center gap-1">
                     <i data-lucide="plus" class="w-3.5 h-3.5"></i> Añadir
                   </button>
-                  <button onclick="cobrarDesdeGaleria('${estilo.nombre}', ${estilo.precio})" class="flex-1 py-2 btn-gold rounded-xl text-xs font-bold transition">Cobrar</button>
+                  <button onclick="cobrarDesdeGaleria('${estilo.nombre}', ${estilo.precio})" class="flex-1 py-2 btn-3d-gold text-slate-950 rounded-xl text-[11px] font-black transition">Cobrar</button>
                 </div>
-                <label class="block text-center text-[10px] text-slate-500 hover:text-amber-300 cursor-pointer transition">
+                <label class="block text-center text-[10px] text-slate-500 hover:text-rose-300 cursor-pointer pt-1 transition">
                   <i data-lucide="upload" class="w-3 h-3 inline"></i> Cambiar Foto Real
                   <input type="file" accept="image/*" class="hidden" onchange="subirFotoEstilo(${estilo.id}, event)">
                 </label>
@@ -655,11 +694,10 @@
     function subirFotoEstilo(id, evt) {
       const file = evt.target.files[0];
       if (!file) return;
-
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = () => {
         const tx = db.transaction("fotos", "readwrite");
-        tx.objectStore("fotos").put({ id: id, src: e.target.result });
+        tx.objectStore("fotos").put({ id: id, src: reader.result });
         tx.oncomplete = () => renderGaleria();
       };
       reader.readAsDataURL(file);
@@ -669,10 +707,9 @@
       document.getElementById("pago-concepto").value = srv;
       document.getElementById("pago-monto").value = precio;
       switchTab('caja');
-      document.getElementById("pago-monto").focus();
     }
 
-    // DIRECTORIO DE CLIENTES
+    // CLIENTES
     document.getElementById("form-cliente").onsubmit = (e) => {
       e.preventDefault();
       const tx = db.transaction("clientes", "readwrite");
@@ -686,31 +723,22 @@
     function cargarClientes() {
       const list = document.getElementById("lista-clientes");
       const sel = document.getElementById("turno-cliente");
-      const filtro = document.getElementById("buscar-cliente") ? document.getElementById("buscar-cliente").value.toLowerCase() : "";
-      
       list.innerHTML = "";
       sel.innerHTML = '<option value="">Seleccionar Cliente</option>';
 
       db.transaction("clientes").objectStore("clientes").getAll().onsuccess = (e) => {
-        const todos = e.target.result;
-
-        todos.forEach(c => {
-          sel.innerHTML += `<option value="${c.nombre}">${c.nombre}</option>`;
-        });
-
-        const filtrados = todos.filter(c => c.nombre.toLowerCase().includes(filtro) || c.telefono.includes(filtro));
-
-        filtrados.forEach(c => {
+        e.target.result.forEach(c => {
           list.innerHTML += `
-            <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-amber-500/10 flex justify-between items-center">
+            <div class="bg-stone-950/80 p-4 rounded-2xl border border-amber-500/20 flex justify-between items-center shadow-inner">
               <div>
-                <p class="font-bold text-xs text-white font-luxury">${c.nombre}</p>
+                <p class="font-bold text-xs text-white font-serif-luxury">${c.nombre}</p>
                 <p class="text-[11px] text-slate-400 mt-0.5">${c.telefono}</p>
               </div>
-              <button onclick="eliminarCliente(${c.id})" class="p-2 text-slate-500 hover:text-rose-400 hover:bg-slate-900 rounded-xl transition" title="Eliminar cliente">
+              <button onclick="eliminarCliente(${c.id})" class="p-2 text-slate-500 hover:text-rose-400 hover:bg-stone-900 rounded-xl transition" title="Eliminar cliente">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
               </button>
             </div>`;
+          sel.innerHTML += `<option value="${c.nombre}">${c.nombre}</option>`;
         });
         lucide.createIcons();
       };
@@ -724,48 +752,7 @@
       }
     }
 
-    // INVENTARIO DE PRODUCTOS
-    document.getElementById("form-stock").onsubmit = (e) => {
-      e.preventDefault();
-      const tx = db.transaction("stock", "readwrite");
-      tx.objectStore("stock").add({
-        nombre: document.getElementById("stock-nombre").value,
-        cantidad: parseInt(document.getElementById("stock-cant").value)
-      });
-      tx.oncomplete = () => { e.target.reset(); cargarStock(); };
-    };
-
-    function cargarStock() {
-      const list = document.getElementById("lista-stock");
-      list.innerHTML = "";
-      db.transaction("stock").objectStore("stock").getAll().onsuccess = (e) => {
-        e.target.result.forEach(s => {
-          list.innerHTML += `
-            <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-amber-500/10 flex justify-between items-center">
-              <div>
-                <span class="font-bold text-xs text-slate-200 block">${s.nombre}</span>
-                <span class="text-[10px] font-mono ${s.cantidad < 5 ? 'text-rose-400 font-bold' : 'text-amber-300'}">
-                  Stock: ${s.cantidad} unidades
-                </span>
-              </div>
-              <button onclick="eliminarStock(${s.id})" class="p-2 text-slate-500 hover:text-rose-400 hover:bg-slate-900 rounded-xl transition" title="Borrar Insumo">
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-              </button>
-            </div>`;
-        });
-        lucide.createIcons();
-      };
-    }
-
-    function eliminarStock(id) {
-      if (confirm("¿Deseas eliminar este insumo del inventario?")) {
-        const tx = db.transaction("stock", "readwrite");
-        tx.objectStore("stock").delete(id);
-        tx.oncomplete = () => cargarStock();
-      }
-    }
-
-    // AGENDA Y VALIDACIÓN DE HORARIOS
+    // HORARIOS
     function toggleSelectorHorarios() {
       const panel = document.getElementById("panel-horarios");
       if (panel.classList.contains("hidden")) {
@@ -808,9 +795,9 @@
           btn.textContent = hora;
          
           if (ocupado) {
-            btn.className = "py-1.5 bg-slate-950 text-slate-600 rounded-lg text-[11px] font-mono cursor-not-allowed border border-slate-900 line-through";
+            btn.className = "py-1.5 bg-stone-950 text-slate-600 rounded-xl text-[11px] font-mono cursor-not-allowed border border-stone-900 line-through";
           } else {
-            btn.className = "py-1.5 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-slate-200 rounded-lg text-[11px] font-mono border border-slate-700 transition font-bold";
+            btn.className = "py-1.5 bg-stone-900 hover:bg-amber-500 hover:text-stone-950 text-slate-200 rounded-xl text-[11px] font-mono border border-stone-800 transition font-bold";
             btn.onclick = () => seleccionarHora(hora);
           }
           grid.appendChild(btn);
@@ -824,6 +811,7 @@
       document.getElementById("panel-horarios").classList.add("hidden");
     }
 
+    // FORMULARIO DE RESERVA -> MOSTRAR TICKET EN PANTALLA
     document.getElementById("form-turno").onsubmit = (e) => {
       e.preventDefault();
       const cliente = document.getElementById("turno-cliente").value;
@@ -878,16 +866,16 @@
           const itemsJson = JSON.stringify(itemsArr).replace(/"/g, '&quot;');
          
           list.innerHTML += `
-            <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-amber-500/10 flex justify-between items-center text-xs">
+            <div class="bg-stone-950/80 p-4 rounded-2xl border border-amber-500/20 flex justify-between items-center text-xs shadow-inner">
               <div>
-                <p class="font-bold gold-text font-luxury text-sm">${t.cliente}</p>
+                <p class="font-bold text-3d-gold font-serif-luxury text-sm">${t.cliente}</p>
                 <p class="text-[11px] text-slate-400 mt-0.5">${t.servicio}</p>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-[10px] bg-slate-900 border border-amber-500/20 px-3 py-1.5 rounded-xl text-amber-200 font-mono">
-                  ${d} — ${h || '00:00'} hs
+                <span class="text-[10px] bg-stone-900 border border-amber-500/30 px-3 py-1.5 rounded-xl text-amber-300 font-mono font-bold">
+                  ${d} - ${h || '00:00'} hs
                 </span>
-                <button onclick="mostrarModalTicketReserva(${t.id}, '${t.cliente}', '${t.fecha}', ${itemsJson}, ${t.montoTotal || 0})" class="p-2 bg-slate-900 hover:bg-slate-800 text-amber-300 rounded-xl border border-amber-500/20 transition" title="Ver Comprobante">
+                <button onclick="mostrarModalTicketReserva(${t.id}, '${t.cliente}', '${t.fecha}', ${itemsJson}, ${t.montoTotal || 0})" class="p-2.5 bg-stone-900 hover:bg-stone-800 text-rose-300 rounded-xl border border-amber-500/30 transition" title="Ver Comprobante">
                   <i data-lucide="ticket" class="w-4 h-4"></i>
                 </button>
               </div>
@@ -897,8 +885,10 @@
       };
     }
 
+    // MOSTRAR TICKET DE RESERVA EN LA INTERFAZ
     function mostrarModalTicketReserva(id, cliente, fechaStr, items, total) {
       document.getElementById("modal-ticket-subtitulo").textContent = "COMPROBANTE DE RESERVA";
+     
       const [dia, hora] = fechaStr.split("T");
      
       let detalleHtml = "";
@@ -916,7 +906,7 @@
           <strong>#${String(id).padStart(4, '0')}</strong>
         </div>
         <div class="flex justify-between">
-          <span>Cliente VIP:</span>
+          <span>Cliente:</span>
           <strong>${cliente}</strong>
         </div>
         <div class="flex justify-between border-b border-dashed border-slate-200 pb-2">
@@ -924,19 +914,19 @@
           <strong>${dia} - ${hora || '00:00'} hs</strong>
         </div>
         <div class="space-y-1 pt-1">
-          <p class="font-bold text-[10px] uppercase text-slate-500">Tratamientos Reservados:</p>
+          <p class="font-bold text-[10px] uppercase text-slate-500">Servicios Reservados:</p>
           ${detalleHtml}
         </div>
         <div class="border-t border-slate-900 pt-2 flex justify-between text-sm font-bold mt-2">
           <span>TOTAL ESTIMADO:</span>
-          <span class="text-emerald-600">$${total ? total.toLocaleString('es-AR') : '0'}</span>
+          <span class="text-amber-700">$${total ? total.toLocaleString('es-AR') : '0'}</span>
         </div>
       `;
 
       document.getElementById("modal-ticket").classList.remove("hidden");
     }
 
-    // REGISTRO DE COBROS Y EMISIÓN DE TICKETS
+    // FORMULARIO DE PAGO -> MOSTRAR TICKET
     document.getElementById("form-pago").onsubmit = (e) => {
       e.preventDefault();
       const concepto = document.getElementById("pago-concepto").value;
@@ -954,7 +944,7 @@
     };
 
     function mostrarModalTicketPago(id, concepto, monto) {
-      document.getElementById("modal-ticket-subtitulo").textContent = "RECIBO OFICIAL DE PAGO";
+      document.getElementById("modal-ticket-subtitulo").textContent = "COMPROBANTE DE PAGO";
       const fechaActual = new Date().toLocaleString('es-AR', { dateStyle: 'short', timeStyle: 'short' });
 
       document.getElementById("modal-ticket-body").innerHTML = `
@@ -967,12 +957,12 @@
           <strong>${fechaActual}</strong>
         </div>
         <div class="space-y-1 pt-1">
-          <p class="font-bold text-[10px] uppercase text-slate-500">Detalle del Servicio:</p>
+          <p class="font-bold text-[10px] uppercase text-slate-500">Detalle del Pago:</p>
           <p class="font-semibold text-slate-800">${concepto}</p>
         </div>
         <div class="border-t border-slate-900 pt-2 flex justify-between text-sm font-bold mt-2">
           <span>TOTAL ABONADO:</span>
-          <span class="text-emerald-600">$${monto.toLocaleString('es-AR')}</span>
+          <span class="text-amber-700">$${monto.toLocaleString('es-AR')}</span>
         </div>
       `;
 
@@ -993,15 +983,15 @@
         e.target.result.forEach(p => {
           tot += p.monto;
           list.innerHTML += `
-            <div class="bg-slate-950/80 p-3 rounded-2xl border border-amber-500/10 flex justify-between items-center text-xs">
+            <div class="bg-stone-950/80 p-3.5 rounded-2xl border border-amber-500/20 flex justify-between items-center text-xs shadow-inner">
               <div>
                 <p class="text-slate-200 font-medium">${p.concepto}</p>
                 <span class="text-[10px] text-slate-500 font-mono">ID: #${String(p.id).padStart(4, '0')}</span>
               </div>
               <div class="flex items-center gap-2">
-                <span class="font-bold text-emerald-400 font-mono">+$${p.monto.toLocaleString('es-AR')}</span>
-                <button onclick="mostrarModalTicketPago(${p.id}, '${p.concepto}', ${p.monto})" class="p-1.5 bg-slate-900 hover:bg-slate-800 text-amber-300 rounded-xl border border-amber-500/20 transition" title="Ver Recibo">
-                  <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
+                <span class="font-bold text-amber-400 font-mono">+$${p.monto.toLocaleString('es-AR')}</span>
+                <button onclick="mostrarModalTicketPago(${p.id}, '${p.concepto}', ${p.monto})" class="p-2 bg-stone-900 hover:bg-stone-800 text-rose-300 rounded-xl border border-amber-500/30 transition" title="Ver Comprobante">
+                  <i data-lucide="ticket" class="w-4 h-4"></i>
                 </button>
               </div>
             </div>`;
@@ -1011,17 +1001,18 @@
       };
     }
 
+    // CIERRE DE CAJA EXCEL
     async function cerrarCaja() {
       const pagos = await new Promise(res => {
         db.transaction("caja").objectStore("caja").getAll().onsuccess = e => res(e.target.result);
       });
 
       if (pagos.length === 0) {
-        alert("La caja no posee movimientos registrados.");
+        alert("La caja se encuentra sin registros activos.");
         return;
       }
 
-      if (confirm("¿Confirmar el cierre de caja? Se generará el reporte financiero en Excel y el balance diario quedará reseteado.")) {
+      if (confirm("¿Confirmar cierre de caja? Se descargará el informe financiero en Excel y el balance se reiniciará.")) {
         const total = pagos.reduce((acc, p) => acc + p.monto, 0);
         const dataCaja = pagos.map(p => ({
           "ID Comprobante": `#${String(p.id).padStart(4, '0')}`,
@@ -1046,7 +1037,34 @@
       }
     }
 
-    // IMPORTACIÓN Y EXPORTACIÓN EXCEL
+    // INSUMOS
+    document.getElementById("form-stock").onsubmit = (e) => {
+      e.preventDefault();
+      const tx = db.transaction("stock", "readwrite");
+      tx.objectStore("stock").add({
+        nombre: document.getElementById("stock-nombre").value,
+        cantidad: parseInt(document.getElementById("stock-cant").value)
+      });
+      tx.oncomplete = () => { e.target.reset(); cargarStock(); };
+    };
+
+    function cargarStock() {
+      const list = document.getElementById("lista-stock");
+      list.innerHTML = "";
+      db.transaction("stock").objectStore("stock").getAll().onsuccess = (e) => {
+        e.target.result.forEach(s => {
+          list.innerHTML += `
+            <div class="bg-stone-950/80 p-4 rounded-2xl border border-amber-500/20 flex justify-between items-center shadow-inner">
+              <span class="font-bold text-xs text-slate-200">${s.nombre}</span>
+              <span class="text-xs px-3.5 py-1.5 rounded-xl ${s.cantidad < 5 ? 'bg-rose-950/80 text-rose-300 border border-rose-800' : 'bg-stone-900 text-amber-300 border border-amber-500/30'} font-mono font-bold">
+                ${s.cantidad} unidades
+              </span>
+            </div>`;
+        });
+      };
+    }
+
+    // GESTIÓN EXCLUSIVA DE EXCEL
     async function exportarClientesExcel() {
       const clientes = await new Promise(res => {
         db.transaction("clientes").objectStore("clientes").getAll().onsuccess = e => res(e.target.result);
@@ -1086,7 +1104,7 @@
         "Cliente": t.cliente,
         "Servicios Seleccionados": t.servicio,
         "Monto Total ($ ARS)": t.montoTotal || 0,
-        "Fecha / Hora": t.fecha.replace("T", " — ") + " hs"
+        "Fecha / Hora": t.fecha.replace("T", " - ") + " hs"
       })));
       XLSX.utils.book_append_sheet(wb, wsTurnos, "Turnos");
 
@@ -1154,3 +1172,4 @@
   </script>
 </body>
 </html>
+
